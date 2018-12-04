@@ -1,0 +1,79 @@
+这一部分学习自动化装配bean
+#Spring从两个角度来实现自动化装配
+	组建装配（component scanning）：Spring会自动发现应用上小文中所创建的bean。
+	自动装配（auto wiring）：Spring自动满足bean之间的依赖。
+		
+	
+#首先创建一个CompactDisc类，Spring会发现它并为其创建一个bean。然后，会创建一个CDPlayer类，让Spring发现它，
+并将CompactDisc bean注入进来。
+
+#为组件扫描的bean命名
+	Spring应用上下文中所以的bean都会给定一个ID,默认为类名的第一个字母小写,例如,SgtPeppers的ID为sgtPePPers.
+	如果想为这个bean设置不同的ID,可用@Component注解,如想设置成lonelyHeartsClub
+		@Component("lonelyHeartsClub")
+		public class SgtPeppers implements CompactDisc{
+			...
+		}
+
+#设置组件扫描的基础包
+	为指定不同的基础包,可在@ComponentScan的value属性中指定包的名称;
+		@Configuration
+		@ComponentScan("soundsystem")
+		public class CDPlayerConfig{}
+	
+	如果想表明设置的是基础包,可通过basePackages属性指定
+		@Configuration
+		@ComponentScan(basePackages="soundsystem","video")
+		public class CDPlayerConfig{}
+		所设置的基础包是以String类型表示的,这种方法是类型不安全的!
+	
+	推荐方法:
+		@Configuration
+		@ComponentScan(backPackagesClasses={CDPlayer.class,DVDPlayer.class})
+		public class CDPlayerConfig{}
+		这些类所在的包会作为组件扫描的基础包,建议在包中创建一个用来进行扫描的空标记接口(marker interface),
+		可避免引用任何实际的应用程序代码(在稍后重构中,这些应用代码有可能会从想要扫描的包中移除掉)
+
+
+
+#通过为bean添加注解实现自动装配
+	@Component
+	public class CDPlayer implements MediaPlayer{
+		private CompactDisc CD;
+		
+		@Autowired
+		public CDPlayer(CompactDisc CD){
+			this.CD=CD;
+		}
+		
+		public void play(){
+			CD.play();
+		}
+	}	
+	这表明当Spring创建CDPlayer bean的时候,会通过这个构造器来进行实例化并且会传入一个可设置
+	给CompactDisc类型的bean.如,CDPlayer cdPlayer=new CDPlayer(CD1);同时创建了CDPlayer和
+	CompactDisc两个bean
+	
+	
+	@Autowired注解不仅能够用在构造器上,还能用在属性的Setter方法上.比如说,如果CDPlayer有一个setCompactDisc()
+	方法,那么可以采用如下的注解形式进行自动装配:
+		@Autowired
+		public void setCompactDisc(CompactDisc CD){
+			this.CD=CD;
+		}
+		
+	实际上,Setter方法并没有什么特殊之处.@Autowired注解可以用在类的任何方法上.假设CDPlayer类有一个insertDisc()
+	方法,那么@Autowired能够发挥同样的作用:
+		@Autowired
+		public void insertCompactDisc(CompactDisc CD){
+			this.CD=CD;
+		}
+
+
+
+
+
+
+
+
+

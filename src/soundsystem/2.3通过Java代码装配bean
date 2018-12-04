@@ -1,0 +1,54 @@
+	想将第三方库中的组件装配到你的应用中,是没有办法在它的类上添加@Component和@Autowired注解的,因此就不能使用自动化装配的方案了.
+	在进行显示配置时,有JavaConfig和XML方案,但JavaConfig是更好的方案,因为它更为强大、类型安全且对重构友好.
+	
+#2.3.1创建配置类
+	创建JavaConfig类的关键在于为其添加@Configuration注解表明这个类是一个配置类,该类应该包含在Spring应用上下文中如何创建bean的细节.
+	
+#2.3.2声明简单的bean
+	@Bean
+	public CompactDisc sgtPeppers(){
+		return new SgtPeppers();
+	}
+
+#2.3.3借助JavaConfig实现注入
+	现在,我们需要声明CDPlayer bean,它依赖于CompactDisc.在JavaConfig中,要如何将它们装配在一起呢?
+	在JavaConfig中装配bean的最简单的方式就是引用创建bean的方法.
+	
+	@Bean
+	public CDPlayer cdPlayer(){
+		return new CDPLayer(sgtPeppers());
+	}
+	cdPlayer()方法像sgtPeppers()方法一样,同样使用了@Bean注解,这表明这个方法会创建一个bean实例并将其注册到Spring应用上下文中.所创建的beanID为cdPlayer.
+	cdPlayer()方法体与sgtPeppers()稍微有些区别.在这里并没有使用默认的构造器构建实例,而是调用了需要传入CompactDisc对象的构造器来创建CDPlayer实例.
+	看起来,CompactDisc是调用sgtPeppers()得到的,但情况并非完全如此.因为SgtPeppers()方法上添加了@Bean注解,Spring将会拦截所以对它的调用,并确保直接返回该方法所创建的bean,而不是每次都对其进行实际的调用.
+	
+	比如说,假设你引入了一个其他的CDPlayer bean,它和之前的那个bean完全一样
+	@Bean
+	public CDPlayer cdPlayer(){
+		return new CDPlayer(sgtPeppers());
+	}
+	@Bean
+	public CDPlayer anotherCDPlayer(){
+		return new CDPlayer(sgtPeppers());
+	}
+	
+						!!!!!!!!!!!!!!!!!!!!!!!!!!!	
+	其实还有一种理解起来更简单的方式:
+	@Bean
+	public CDPlayer cdPlayer(CompactDics compactDics){
+		return new cdPlayer(compactDics);
+	}
+	在这里,cdPlayer()方法请求一个CompactDisc作为参数.当Spring调用cdPlayer()创建CDPlayer bean的时候,它会自动装配一个CompactDics到配置方法之中.然后,方法体就可以按照合适的方式来使用它.借助这种技术,cdPlayer()方法也能将CompactDisc注入到CDPlayer的构造器中,而且不用明确引用CompactDisc的@Bean方法
+	通过这种方式引用其他的bean通常是最佳的选择,因为它不会要求将CompactDisc声明到同一个配置类之中.在这里甚至没有要求CompactDisc必须要在JavaConfig中声明,实际上它可以通过组件扫描功能自动发现或者通过XML来进行配置.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

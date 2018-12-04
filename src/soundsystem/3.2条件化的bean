@@ -1,0 +1,35 @@
+#3.2条件化的bean
+	如果希望一个或者多个bean只有在应用的类路径下包含特定的库时才创建,或者希望某个bean只有当另外某个特定的bean也声明了之后才会创建,再或者要求只有某个特定的环境变量设置之后,才会创建某个bean.
+	那么,可以用@Conditional注解,它可以用到带有@Bean注解的方法上.如果条件为TRUE,就会创建这个bean!
+	
+	例如,假设一个名为MagicBean的类,我们希望只有设置了magic环境属性的时候,Spring才会实例化这个类.如果环境中没有这个属性,那么MagicBean将会被忽略.
+	
+	@Bean
+	@Conditional(MagicExistsCondition.class)		//只有MagicExistsCondition.class为真才创建magic
+	public MagicBean magicBean(){
+		return new MagicBean();
+	}
+	
+	@Conditional将会通过Condition接口进行条件对比:
+	
+	public interface Condition(){
+		boolean matches(ConditionContext ctxt,AnnotatedTypeMetadata,metadata);
+	}
+	设置给@Conditional的类可以是任意实现了Condition接口的类型,只需提供matches()方法的实现即可.如果matches()返回为TRUE,则创建bean
+	
+#在Condition中检查是否存在magic属性
+
+	public class MagicExistsCondition implements Condition{
+		public boolean matches(ConditionContext context,AnnotatedTypeMetadata metadata){
+			Environment env =context.getEnvironment();
+			return env.containsProperty("magic");
+		}
+	}
+	//metadata指的是要被检查的类或者方法,即@Conditional里的MagicExistsCondition
+	matches()方法简单但功能强大,它通过给定的ConditionContext对象进而得到Environment对象,并使用这个对象检查环境中是否存在名为magic的环境属性.在本例中,属性的值是什么无所谓,只要属性存在即可满足要求
+
+		
+		
+		
+		
+		

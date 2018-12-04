@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-websocket-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-jms-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-aop-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-aspects-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-beans-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-context-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-context-support-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-core-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-expression-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-instrument-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-instrument-tomcat-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-jdbc-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-messaging-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-orm-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-oxm-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-test-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-tx-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-web-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-webmvc-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/javaee/spring-framework-4.2.4.RELEASE/完整release包/spring-webmvc-portlet-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/apache-tomcat-9.0.12/webapps/examples/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar"/>
+	<classpathentry kind="lib" path="/JavaEE/apache-tomcat-9.0.12/webapps/examples/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
