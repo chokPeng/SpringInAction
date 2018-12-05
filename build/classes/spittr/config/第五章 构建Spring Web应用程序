@@ -8,3 +8,17 @@
 	但是在Spring Web应用中,通常还有另外一个应用上下文.另外的这个应用上下文是由ContextLoaderListener创建.
 	
 	我们希望DispatcherServlet加载包含Web组件的bean,如控制器,视图解析器以及处理器映射.而ContextLoaderListener要加载应用中的其它bean.这些bean通常是驱动应用后端的中间层和数据层组件.
+	
+实际上,AbstractAnnotationConfigDispatcherServletInitializer会同时创建DispatcherServlet和ContextLoaderListener.
+
+GetServletConfigClasses()方法返回的带有@Configuration注解的类将会用来定义DispatcherServlet应用上下文中的bean.
+
+
+
+
+
+
+
+
+
+
